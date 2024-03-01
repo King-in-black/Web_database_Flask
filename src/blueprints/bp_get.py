@@ -5,7 +5,6 @@ from ..models import Player, Trainer, Data
 from ..schemas import Player_Schema, Trainer_Schema, Data_Schema
 from ..extension import db
 
-
 @get_bp.errorhandler(409)
 def resource_already_exist(e):
     return jsonify(error=str(e)), 409
