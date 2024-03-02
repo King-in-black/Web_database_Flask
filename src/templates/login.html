@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+
+{% block content %}
+    <h1>Login</h1>
+    {% for message in get_flashed_messages(category_filter=["error", "success"]) %}
+        <div>{{ message }}</div>
+    {% endfor %}
+    <form method="POST" action="{{ url_for('webpage.login') }}">
+        <label for="role">Role:</label>
+        <select name="role" id="role" required class="form-control">
+            <option value="player">Player</option>
+            <option value="trainer">Trainer</option>
+        </select>
+        <div id="user_id_field">
+            <label for="user_id">ID:</label>
+            <input type="text" name="user_id" id="user_id" placeholder="Your ID" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+
+{% endblock %}

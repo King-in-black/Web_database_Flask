@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+    <h1>Welcome to Motion Prediction App</h1>
+    <form action="/homepage" method="post">
+        <button type="submit" name="action" value="login">Login</button>
+        <button type="submit" name="action" value="register">Register</button>
+    </form>
+{% endblock %}
