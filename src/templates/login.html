@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<div class= "">
     <h1>Login</h1>
     {% for message in get_flashed_messages(category_filter=["error", "success"]) %}
         <div>{{ message }}</div>
@@ -20,4 +21,5 @@
         </div>
         <button type="submit">Login</button>
     </form>
+    </div>
 {% endblock %}
