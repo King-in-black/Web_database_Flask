@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Welcome to Motion Prediction App</h1>
+    <h1>Homepage</h1>
     <form action="/homepage" method="post">
         <button type="submit" name="action" value="login">Login</button>
         <button type="submit" name="action" value="register">Register</button>
     </form>
+    <h2>
+        The brief introduction of the website:
+    </h2>
+    <h3>
+       Professional coaches can evaluate and analyse player performance using pre-processed IMU data
+     (including acceleration and rotational speed). Players can review their performance after the coach has analysed their data.
+      their data.
+    </h3>
 {% endblock %}
