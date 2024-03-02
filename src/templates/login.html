@@ -1,25 +1,45 @@
 {% extends "base.html" %}
+{% block head %}
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+
+{% endblock %}
 {% block content %}
-<div class= "">
-    <h1>Login</h1>
+ <div class="container mt-5 pt-5">
+    <div class ='row'>
+         <div class="col-md-6">
+        <div class ="card">
+            <img src="{{ url_for('static', filename='image/IMU_1.png') }}" class="card-img-top" alt="...">
+        </div>
+        </div>
+        <div class="col-md-6 mt-5 pt-5">
+              <div class="card">
+                   <div class="card-body">
+                        <h1 class="card-title">Login</h1>
     {% for message in get_flashed_messages(category_filter=["error", "success"]) %}
         <div>{{ message }}</div>
     {% endfor %}
     <form method="POST" action="{{ url_for('webpage.login') }}">
         <label for="role">Role:</label>
-        <select name="role" id="role" required class="form-control">
+        <select name="role" id="role" required class= "form-control" >
             <option value="player">Player</option>
             <option value="trainer">Trainer</option>
         </select>
         <div id="user_id_field">
             <label for="user_id">ID:</label>
-            <input type="text" name="user_id" id="user_id" placeholder="Your ID" required>
+            <input type="text" name="user_id" id="user_id" placeholder="Your ID" required class= "form-control" >
         </div>
         <div>
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" placeholder="Password" required>
+            <input type="password" name="password" id="password" placeholder="Password" required class= "form-control">
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" class="btn btn-primary">Login</button>
     </form>
-    </div>
+                       </div>
+                   </div>
+         </div>
+
+        </div>
+        </div>
+
 {% endblock %}
