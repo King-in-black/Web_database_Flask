@@ -6,7 +6,7 @@
 {% block content %}
  <div class="container mt-5 pt-5">
     <div class ='row'>
-         <div class="col-md-6">
+         <div class="col-md-6 ">
         <div class ="card">
             <img src="{{ url_for('static', filename='image/IMU_1.png') }}" class="card-img-top" alt="...">
         </div>
@@ -20,19 +20,19 @@
     {% endfor %}
     <form method="POST" action="{{ url_for('webpage.login') }}">
         <label for="role">Role:</label>
-        <select name="role" id="role" required class= "form-control" >
+        <select name="role" id="role" required class= "form-control mb-3" >
             <option value="player">Player</option>
             <option value="trainer">Trainer</option>
         </select>
         <div id="user_id_field">
             <label for="user_id">ID:</label>
-            <input type="text" name="user_id" id="user_id" placeholder="Your ID" required class= "form-control" >
+            <input type="text" name="user_id" id="user_id" placeholder="Your ID" required class= "form-control mb-3" >
         </div>
         <div>
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" placeholder="Password" required class= "form-control">
+            <input type="password" name="password" id="password" placeholder="Password" required class= "form-control mb-3">
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary mb-3">Login</button>
     </form>
                        </div>
                    </div>
