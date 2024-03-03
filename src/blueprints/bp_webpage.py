@@ -91,7 +91,7 @@ def login():
             # if the user is player, the database will be asked for certain records of the player
             # if the password and the ID of the form requested match with records in the database
             # login page passed
-            user = Player.query.filter_by(Player_ID=user_id, password=password).scalarone()
+            user = Player.query.filter_by(Player_ID=user_id, password=password).scalar()
             if user:
                 # when the player login successfully, the following steps will be inplemented
                 flash('Player login successful!', 'success')
@@ -102,7 +102,7 @@ def login():
 
         elif role == 'trainer':
             # when the trainer login successfully, the following steps will be inplemented
-            user = Trainer.query.filter_by(Trainer_ID=user_id, password=password).scalarone()
+            user = Trainer.query.filter_by(Trainer_ID=user_id, password=password).scalar()
             if user:
                 # when the trainer login successfully, the following steps will be inplemented
                 flash('Trainer login successful!', 'success')
