@@ -5,6 +5,12 @@ from ..schemas import Player_Schema,Trainer_Schema,Data_Schema
 from ..extension import db
 
 webpage_bp = Blueprint("webpage", __name__)
+@webpage_bp.route('/', methods=['GET', 'POST'])
+def jump_homepage():
+    '''
+    :return: jump to the homepage url
+    '''
+    return redirect(url_for('webpage.homepage'))
 @webpage_bp.route('/homepage', methods=['GET', 'POST'])
 # a homepage for the webapp
 def homepage():
@@ -17,10 +23,10 @@ def homepage():
         # according to the value of action, the page will redirect to another page.
         if action == 'login':
             # if the use types the button for login; they will jump to login page
-            return redirect(url_for('login'))
+            return redirect(url_for('webpage.login'))
         elif action == 'register':
             # or they will jump to register page
-            return redirect(url_for('register'))
+            return redirect(url_for('webpage.register'))
         else:
             jsonify('Invalid action', 400)
     return render_template('homepage.html')
