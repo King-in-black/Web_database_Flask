@@ -3,7 +3,7 @@ from flask import flash
 from ..models import Player,Trainer,Data
 from ..schemas import Player_Schema,Trainer_Schema,Data_Schema
 from ..extension import db
-
+import pickle
 webpage_bp = Blueprint("webpage", __name__)
 @webpage_bp.route('/', methods=['GET', 'POST'])
 def jump_homepage():
@@ -112,3 +112,48 @@ def login():
                 flash('Invalid Trainer ID or password', 'error')
 
     return render_template('login.html')
+
+@webpage_bp.route('/predict', methods=['GET', 'POST'])
+def predict():
+    '''
+    allow users to predict whether a person is moving;
+    and use integration function to calculate the velocity,displacement and angle rotated.
+    return:
+          the html template of the prediction page
+
+    '''
+    if  request.method == 'POST':
+        accX = request.form['accX']
+        accY = request.form['accY']
+        accZ = request.form['accZ']
+        gyroX = request.form['gyroX']
+        gyroY = request.form['gyroY']
+        gyroZ = request.form['gyroZ']
+        role = request.form['role']
+        if role == 'player':
+            # the db will be asked to check whether there is a player ID
+            existing_user = Player.query.filter_by(Player_ID=player_id).first()
+            if existing_user:
+            # if the player exists, the 404 error will return
+                abort(404, description="Player already exists.")
+            # or a Player instance will be asked to create in the database
+            new_user = Player(Player_ID=player_id, password=password, Trainer_ID=trainer_id)
+            db.session.add(new_user)
+        elif role == 'trainer':
+            # Check whether there is a player exists or not
+            existing_user = Trainer.query.filter_by(Trainer_ID=trainer_id).first()
+            if existing_user:
+            # if the trainer exists, the 404 error will return
+                abort(404, description="Trainer already exists.")
+            # or a Trainer instance will be asked to create in the database
+            new_user = Trainer(Trainer_ID=trainer_id, password=password)
+            db.session.add(new_user)
+        else:
+            flash('Please select a valid role', 'error')
+            return render_template('register.html')
+
+        db.session.commit()  # submit the changes in the database
+        # jump to login page if a user register successfully
+        return redirect(url_for('login'))
+
+    return render_template('register.html')
