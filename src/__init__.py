@@ -10,8 +10,7 @@ from .blueprints.bp_put import put_bp
 from .blueprints.bp_webpage import webpage_bp
 import pandas as pd
 from .models import Data
-current_file_path = os.path.realpath(__file__)
-path = os.path.join(os.path.dirname(current_file_path), "..", "data", "data.csv")
+path=r'data\data.csv'
 
 
 def create_app(test_config=None):
