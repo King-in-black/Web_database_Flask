@@ -24,8 +24,6 @@ class Data_Schema(ma.SQLAlchemySchema):
     Activity = ma.auto_field()
     Resultant_Acc = ma.auto_field()
     Resultant_Gyro = ma.auto_field()
-    Average_Speed = ma.auto_field()
-    Average_rotational_speed = ma.auto_field()
 
 
 class Trainer_Schema(ma.SQLAlchemySchema):

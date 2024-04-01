@@ -5,7 +5,7 @@ from ..schemas import Player_Schema,Trainer_Schema,Data_Schema
 from ..extension import db
 import pickle
 import math
-model = pickle.load(open(r'..\ML_models\random_forest_model.pkl', 'rb'))
+model = pickle.load(open(r'ML_models\random_forest_model.pkl', 'rb'))
 webpage_bp = Blueprint("webpage", __name__)
 @webpage_bp.route('/', methods=['GET', 'POST'])
 def jump_homepage():
@@ -97,7 +97,7 @@ def login():
             if user:
                 # when the player login successfully, the following steps will be inplemented
                 flash('Player login successful!', 'success')
-                return redirect(url_for('predict'))  # incomplete player page for prediction the result
+                return  redirect(url_for('webpage.predict'))  # incomplete player page for prediction the result
             else:
                 # when there is a failure, the following styles will be implemented
                 flash('Invalid Player ID or password', 'error')
@@ -108,7 +108,7 @@ def login():
             if user:
                 # when the trainer login successfully, the following steps will be inplemented
                 flash('Trainer login successful!', 'success')
-                return redirect(url_for('predict'))  # incomplete trainer page for upload the results
+                return  redirect(url_for('webpage.predict'))
             else:
                 # when there is a failure, the following styles will be implemented
                 flash('Invalid Trainer ID or password', 'error')
@@ -116,7 +116,7 @@ def login():
     return render_template('login.html')
 
 @webpage_bp.route('/predict', methods=['GET', 'POST'])
-def upload_predict():
+def predict():
     '''
     allow users to upload the data to ask  whether a person is moving;
     if format is correct, the webpage will direct to predict page.
