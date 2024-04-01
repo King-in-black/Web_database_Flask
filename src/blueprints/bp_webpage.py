@@ -145,21 +145,22 @@ def predict():
         else:
             # use the model to predict
             prediction = model.predict([[accX, accY, accZ, gyroX, gyroY, gyroZ]])[0]
+            if prediction < 0.5:
+                Activity = 1
+                Move = 'Stationary'
+            elif prediction >= 0.5:
+                Activity = 0
+                Move = 'Moving'
+            Resultant_Acc = math.sqrt(accX ** 2 + accY ** 2 + accZ ** 2)
+            Resultant_Gyro = math.sqrt(gyroX ** 2 + gyroY ** 2 + gyroZ ** 2)
+            # write the data into the database.
+            data = Data(Player_ID=player_id, Trainer_ID=trainer_id, accX=accX, accY=accY, accZ=accZ, gyroX=gyroX,
+                        gyroY=gyroY, gyroZ=gyroZ, Activity=Activity, Resultant_Acc=Resultant_Acc,
+                        Resultant_Gyro=Resultant_Gyro)
+            # summit the data row
+            db.session.add(data)
         # when activity is labeled as 1 means that the person is moving; the activity is labeled as 0 when the person is
         # stationary
-        if prediction < 0.5:
-            Activity = 1
-            Move = 'Stationary'
-        elif prediction >= 0.5:
-           Activity = 0
-           Move = 'Moving'
-        Resultant_Acc= math.sqrt(accX**2+accY**2+accZ**2)
-        Resultant_Gyro = math.sqrt(gyroX ** 2 + gyroY ** 2 + gyroZ ** 2)
-        # write the data into the database.
-        data = Data(Player_ID=player_id, Trainer_ID=trainer_id, accX=accX, accY=accY, accZ=accZ, gyroX=gyroX,
-                    gyroY=gyroY, gyroZ=gyroZ,Activity=Activity, Resultant_Acc=Resultant_Acc,
-                    Resultant_Gyro=Resultant_Gyro)
-        # summit the data row
-        db.session.add(data)
+
     # provide the prediction result
     return render_template('predict.html', prediction=prediction, Move=Move)
