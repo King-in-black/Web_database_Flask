@@ -1,10 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+ <div class="container mt-5 pt-5">
+    <div class ='row'>
+         <div class="col-md-6">
+        <div class ="card">
+            <img src="{{ url_for('static', filename='image/IMU_3.png') }}" class="card-img-top" alt="...">
+        </div>
+        </div>
+        <div class="col-md-6 mt-5 pt-5">
+              <div class="card">
+                   <div class="card-body">
+                        <h1 class="card-title">Predict</h1>
+    <form action="/predict" method="post">
+        <div>
+            <label for ="Trainer_ID"> Trainer_ID: </label>
+            <input type="text" name="Trainer_ID" id = "Trainer_ID" placeholder="Trainer_ID" required class="form-control mb-3">
+        </div>
+        <div>
+            <label for="Player_ID">Player_ID:</label>
+            <input type="text" name="Player_ID" id = 'Player_ID' placeholder="Player_ID" required class="form-control mb-3">
+        </div>
+        <div>
+            <label for ="accX"> accX: </label>
+            <input type="number" name="accX" id = "accX" placeholder="accX" required class="form-control mb-3">
+        </div>
+        <div>
+            <label for ="accY"> accY: </label>
+            <input type="number" name="accY" id = "accY" placeholder="accY" required class="form-control mb-3">
+        </div>
+        <div>
+            <label for ="accZ"> accZ: </label>
+            <input type="number" name="accZ" id = "accZ" placeholder="accZ" required class="form-control mb-3">
+        </div>
+                <div>
+            <label for ="gyroX"> gyroX: </label>
+            <input type="number" name="gyroX" id = "gyroX" placeholder="gyroX" required class="form-control mb-3">
+        </div>
+        <div>
+            <label for ="gyroY"> gyroY: </label>
+            <input type="number" name="gyroY" id = "gyroY" placeholder="gyroY" required class="form-control mb-3">
+        </div>
+        <div>
+            <label for ="gyroZ"> Acc_Z: </label>
+            <input type="number" name="gyroZ" id = "gyroZ" placeholder="gyroZ" required class="form-control mb-3">
+        </div>
+   <button type="submit" class="btn btn-primary">Predict</button>
+</form>
+    </form>
+                       </div>
+                   </div>
+         </div>
+
+        </div>
+     <div class ='row'>
+         <div class="col-md-12 mt-5 pt-5">
+              <div class="card">
+                   <div class="card-body">
+                        <h1 class="card-title">Result</h1>
+                        <h2 class="mt-5">Prediction Result</h2>
+                        {% if prediction is not none and Move %}
+                       <div class="alert alert-info" role="alert">
+                       <strong>Prediction:</strong> {{ prediction }}
+                       </div>
+                        <div class="alert alert-success" role="alert">
+                        <strong>Status:</strong> {{ Move }}
+                        </div>
+                        {% else %}
+                        <div class="alert alert-warning" role="alert">
+                        No prediction available.
+                        </div>
+        {% endif %}
+                         </div>
+                    </div>
+               </div>
+         </div>
+        </div>
+{% endblock %}

@@ -4,6 +4,7 @@ from ..models import Player,Trainer,Data
 from ..schemas import Player_Schema,Trainer_Schema,Data_Schema
 from ..extension import db
 import pickle
+import math
 model = pickle.load(open(r'..\ML_models\random_forest_model.pkl', 'rb'))
 webpage_bp = Blueprint("webpage", __name__)
 @webpage_bp.route('/', methods=['GET', 'POST'])
@@ -124,6 +125,7 @@ def upload_predict():
     '''
     # initialize the prediction
     prediction = None
+    Move = None
     if  request.method == 'POST':
         try:
             accX = float(request.form.get('accX'))
@@ -146,10 +148,18 @@ def upload_predict():
         # when activity is labeled as 1 means that the person is moving; the activity is labeled as 0 when the person is
         # stationary
         if prediction < 0.5:
-            activity = 'Stationary'
+            Activity = 1
+            Move = 'Stationary'
         elif prediction >= 0.5:
-            activity = 'Moving'
+           Activity = 0
+           Move = 'Moving'
+        Resultant_Acc= math.sqrt(accX**2+accY**2+accZ**2)
+        Resultant_Gyro = math.sqrt(gyroX ** 2 + gyroY ** 2 + gyroZ ** 2)
         # write the data into the database.
-        new_Data = Player(Player_ID=player_id, password=password, Trainer_ID=trainer_id)
+        data = Data(Player_ID=player_id, Trainer_ID=trainer_id, accX=accX, accY=accY, accZ=accZ, gyroX=gyroX,
+                    gyroY=gyroY, gyroZ=gyroZ,Activity=Activity, Resultant_Acc=Resultant_Acc,
+                    Resultant_Gyro=Resultant_Gyro)
+        # summit the data row
+        db.session.add(data)
     # provide the prediction result
-    return render_template('predict.html', prediction=prediction)
+    return render_template('predict.html', prediction=prediction, Move=Move)
