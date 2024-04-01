@@ -4,6 +4,7 @@ from ..models import Player,Trainer,Data
 from ..schemas import Player_Schema,Trainer_Schema,Data_Schema
 from ..extension import db
 import pickle
+model = pickle.load(open(r'..\ML_models\random_forest_model.pkl', 'rb'))
 webpage_bp = Blueprint("webpage", __name__)
 @webpage_bp.route('/', methods=['GET', 'POST'])
 def jump_homepage():
@@ -121,6 +122,8 @@ def upload_predict():
     return:
           the html template of the prediction page
     '''
+    # initialize the prediction
+    prediction = None
     if  request.method == 'POST':
         try:
             accX = float(request.form.get('accX'))
@@ -137,6 +140,12 @@ def upload_predict():
             flash('All forms are required to be filled!')
             # render template again
             return render_template('predict.html')
+        else:
+            # use the model to predict
+            prediction = model.predict([[accX, accY, accZ, gyroX, gyroY, gyroZ]])[0]
 
-        # jump to login page if a user register successfully
+    # provide the prediction result
+    return render_template('predict.html', prediction=prediction)
+
+    # jump to login page if a user register successfully
     return render_template('predict.html')
