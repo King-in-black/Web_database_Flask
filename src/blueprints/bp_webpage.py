@@ -95,7 +95,7 @@ def login():
             if user:
                 # when the player login successfully, the following steps will be inplemented
                 flash('Player login successful!', 'success')
-                return redirect(url_for('player_dashboard'))  # incomplete player page for prediction the result
+                return redirect(url_for('predict'))  # incomplete player page for prediction the result
             else:
                 # when there is a failure, the following styles will be implemented
                 flash('Invalid Player ID or password', 'error')
@@ -106,7 +106,7 @@ def login():
             if user:
                 # when the trainer login successfully, the following steps will be inplemented
                 flash('Trainer login successful!', 'success')
-                return redirect(url_for('trainer_dashboard'))  # incomplete trainer page for upload the results
+                return redirect(url_for('predict'))  # incomplete trainer page for upload the results
             else:
                 # when there is a failure, the following styles will be implemented
                 flash('Invalid Trainer ID or password', 'error')
@@ -114,46 +114,29 @@ def login():
     return render_template('login.html')
 
 @webpage_bp.route('/predict', methods=['GET', 'POST'])
-def predict():
+def upload_predict():
     '''
-    allow users to predict whether a person is moving;
-    and use integration function to calculate the velocity,displacement and angle rotated.
+    allow users to upload the data to ask  whether a person is moving;
+    if format is correct, the webpage will direct to predict page.
     return:
           the html template of the prediction page
-
     '''
     if  request.method == 'POST':
-        accX = request.form['accX']
-        accY = request.form['accY']
-        accZ = request.form['accZ']
-        gyroX = request.form['gyroX']
-        gyroY = request.form['gyroY']
-        gyroZ = request.form['gyroZ']
-        role = request.form['role']
-        if role == 'player':
-            # the db will be asked to check whether there is a player ID
-            existing_user = Player.query.filter_by(Player_ID=player_id).first()
-            if existing_user:
-            # if the player exists, the 404 error will return
-                abort(404, description="Player already exists.")
-            # or a Player instance will be asked to create in the database
-            new_user = Player(Player_ID=player_id, password=password, Trainer_ID=trainer_id)
-            db.session.add(new_user)
-        elif role == 'trainer':
-            # Check whether there is a player exists or not
-            existing_user = Trainer.query.filter_by(Trainer_ID=trainer_id).first()
-            if existing_user:
-            # if the trainer exists, the 404 error will return
-                abort(404, description="Trainer already exists.")
-            # or a Trainer instance will be asked to create in the database
-            new_user = Trainer(Trainer_ID=trainer_id, password=password)
-            db.session.add(new_user)
-        else:
-            flash('Please select a valid role', 'error')
-            return render_template('register.html')
+        try:
+            accX = float(request.form.get('accX'))
+            accY = float(request.form.get('accY'))
+            accZ = float(request.form.get('accZ'))
+            gyroX = float(request.form.get('gyroX'))
+            gyroY = float(request.form.get('gyroY'))
+            gyroZ = float(request.form.get('gyroZ'))
+        except ValueError:
+            return jsonify({"error": "Invalid input. Please ensure all values are numbers."}), 400
+        player_id = request.form.get('player_id')
+        trainer_id = request.form.get('trainer_id')
+        if not accX or not accY or not accZ or not gyroX or not gyroY or not gyroZ or not player_id or not  trainer_id:
+            flash('All forms are required to be filled!')
+            # render template again
+            return render_template('predict.html')
 
-        db.session.commit()  # submit the changes in the database
         # jump to login page if a user register successfully
-        return redirect(url_for('login'))
-
-    return render_template('register.html')
+    return render_template('predict.html')
