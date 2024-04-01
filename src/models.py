@@ -69,5 +69,4 @@ class Data(db.Model):
     Activity: Mapped[bool] = mapped_column(db.Boolean, nullable=True)
     Resultant_Acc: Mapped[float] = mapped_column(db.Float(32), nullable=True)
     Resultant_Gyro: Mapped[float] = mapped_column(db.Float(32), nullable=True)
-    Average_Speed: Mapped[float] = mapped_column(db.Float(32), nullable=True)
-    Average_rotational_speed: Mapped[float] = mapped_column(db.Float(32), nullable=True)
+

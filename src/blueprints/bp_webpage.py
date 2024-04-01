@@ -143,9 +143,13 @@ def upload_predict():
         else:
             # use the model to predict
             prediction = model.predict([[accX, accY, accZ, gyroX, gyroY, gyroZ]])[0]
-
+        # when activity is labeled as 1 means that the person is moving; the activity is labeled as 0 when the person is
+        # stationary
+        if prediction < 0.5:
+            activity = 'Stationary'
+        elif prediction >= 0.5:
+            activity = 'Moving'
+        # write the data into the database.
+        new_Data = Player(Player_ID=player_id, password=password, Trainer_ID=trainer_id)
     # provide the prediction result
     return render_template('predict.html', prediction=prediction)
-
-    # jump to login page if a user register successfully
-    return render_template('predict.html')
