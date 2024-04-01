@@ -145,14 +145,12 @@ def predict():
         else:
             # use the model to predict
             prediction = float(model.predict([[accX, accY, accZ, gyroX, gyroY, gyroZ]]))
-            prediction = 1
             if prediction < 0.5:
-                Activity = 1
-                Move = 'Stationary'
-            elif prediction >= 0.5:
                 Activity = 0
+                Move = 'Stationary'
+            else:
+                Activity = 1
                 Move = 'Moving'
-            print(f"Prediction: {prediction}, Move: {Move}")
             Resultant_Acc = math.sqrt(accX ** 2 + accY ** 2 + accZ ** 2)
             Resultant_Gyro = math.sqrt(gyroX ** 2 + gyroY ** 2 + gyroZ ** 2)
             # write the data into the database.
