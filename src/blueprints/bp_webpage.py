@@ -136,21 +136,23 @@ def predict():
             gyroZ = float(request.form.get('gyroZ'))
         except ValueError:
             return jsonify({"error": "Invalid input. Please ensure all values are numbers."}), 400
-        player_id = request.form.get('player_id')
-        trainer_id = request.form.get('trainer_id')
+        player_id = request.form.get('Player_ID')
+        trainer_id = request.form.get('Trainer_ID')
         if not accX or not accY or not accZ or not gyroX or not gyroY or not gyroZ or not player_id or not  trainer_id:
             flash('All forms are required to be filled!')
             # render template again
-            return render_template('predict.html')
+            return render_template('predict.html',prediction=prediction, Move=Move)
         else:
             # use the model to predict
-            prediction = model.predict([[accX, accY, accZ, gyroX, gyroY, gyroZ]])[0]
+            prediction = float(model.predict([[accX, accY, accZ, gyroX, gyroY, gyroZ]]))
+            prediction = 1
             if prediction < 0.5:
                 Activity = 1
                 Move = 'Stationary'
             elif prediction >= 0.5:
                 Activity = 0
                 Move = 'Moving'
+            print(f"Prediction: {prediction}, Move: {Move}")
             Resultant_Acc = math.sqrt(accX ** 2 + accY ** 2 + accZ ** 2)
             Resultant_Gyro = math.sqrt(gyroX ** 2 + gyroY ** 2 + gyroZ ** 2)
             # write the data into the database.
