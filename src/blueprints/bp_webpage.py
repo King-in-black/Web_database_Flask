@@ -126,6 +126,8 @@ def predict():
     # initialize the prediction
     prediction = None
     Move = None
+    Resultant_Acc=None
+    Resultant_Gyro=None
     if  request.method == 'POST':
         try:
             accX = float(request.form.get('accX'))
@@ -145,14 +147,17 @@ def predict():
         else:
             # use the model to predict
             prediction = float(model.predict([[accX, accY, accZ, gyroX, gyroY, gyroZ]]))
+            Resultant_Acc = math.sqrt(accX ** 2 + accY ** 2 + accZ ** 2)
+            Resultant_Gyro = math.sqrt(gyroX ** 2 + gyroY ** 2 + gyroZ ** 2)
+            # add a deterministic method to mimic the behaviour of prediction = 0
+            if Resultant_Acc and Resultant_Gyro < 0.5:
+                prediction = 0
             if prediction < 0.5:
                 Activity = 0
                 Move = 'Stationary'
             else:
                 Activity = 1
                 Move = 'Moving'
-            Resultant_Acc = math.sqrt(accX ** 2 + accY ** 2 + accZ ** 2)
-            Resultant_Gyro = math.sqrt(gyroX ** 2 + gyroY ** 2 + gyroZ ** 2)
             # write the data into the database.
             data = Data(Player_ID=player_id, Trainer_ID=trainer_id, accX=accX, accY=accY, accZ=accZ, gyroX=gyroX,
                         gyroY=gyroY, gyroZ=gyroZ, Activity=Activity, Resultant_Acc=Resultant_Acc,
@@ -163,4 +168,5 @@ def predict():
         # stationary
 
     # provide the prediction result
-    return render_template('predict.html', prediction=prediction, Move=Move)
+    return render_template('predict.html', prediction=prediction, Move=Move,
+                           Resultant_Gyro=Resultant_Gyro,Resultant_Acc=Resultant_Acc)

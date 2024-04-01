@@ -23,27 +23,27 @@
         </div>
         <div>
             <label for ="accX"> accX: </label>
-            <input type="number" name="accX" id = "accX" placeholder="accX" required class="form-control mb-3">
+            <input type="number" step="any" name="accX" id = "accX" placeholder="accX" required class="form-control mb-3">
         </div>
         <div>
             <label for ="accY"> accY: </label>
-            <input type="number" name="accY" id = "accY" placeholder="accY" required class="form-control mb-3">
+            <input type="number"  step="any" name="accY" id = "accY" placeholder="accY" required class="form-control mb-3">
         </div>
         <div>
             <label for ="accZ"> accZ: </label>
-            <input type="number" name="accZ" id = "accZ" placeholder="accZ" required class="form-control mb-3">
+            <input type="number" step="any" name="accZ" id = "accZ" placeholder="accZ" required class="form-control mb-3">
         </div>
                 <div>
             <label for ="gyroX"> gyroX: </label>
-            <input type="number" name="gyroX" id = "gyroX" placeholder="gyroX" required class="form-control mb-3">
+            <input type="number"  step="any" name="gyroX" id = "gyroX" placeholder="gyroX" required class="form-control mb-3">
         </div>
         <div>
             <label for ="gyroY"> gyroY: </label>
-            <input type="number" name="gyroY" id = "gyroY" placeholder="gyroY" required class="form-control mb-3">
+            <input type="number" step="any" name="gyroY" id = "gyroY" placeholder="gyroY" required class="form-control mb-3">
         </div>
         <div>
             <label for ="gyroZ"> gyroZ: </label>
-            <input type="number" name="gyroZ" id = "gyroZ" placeholder="gyroZ" required class="form-control mb-3">
+            <input type="number" step="any" name="gyroZ" id = "gyroZ" placeholder="gyroZ" required class="form-control mb-3">
         </div>
    <button type="submit" class="btn btn-primary">Predict</button>
 </form>
@@ -65,6 +65,12 @@
                        </div>
                         <div class="alert alert-success" role="alert">
                         <strong>Status:</strong> {{ Move }}
+                        </div>
+                        <div class="alert alert-info" role="alert">
+                       <strong>Resultant Acceleration:</strong> {{ Resultant_Acc }}
+                       </div>
+                        <div class="alert alert-success" role="alert">
+                        <strong>Resultant Gyro:</strong> {{ Resultant_Gyro }}
                         </div>
                         {% else %}
                         <div class="alert alert-warning" role="alert">
