@@ -19,6 +19,11 @@
     {% for message in get_flashed_messages(category_filter=["error", "success"]) %}
         <div>{{ message }}</div>
     {% endfor %}
+                       <div class="alert alert-info" role="alert">
+                       <strong>Professional coaches can evaluate and analyse player performance using pre-processed IMU data
+     including acceleration and rotational speed). Players can also review their performance.
+                       </strong>
+                         </div>
     <form method="POST" action="{{ url_for('webpage.homepage') }}">
         <button type="submit" name="action" value="login" class="btn btn-primary mb-3">Login</button>
         <button type="submit" name="action" value="register" class="btn btn-primary mb-3">Register</button>
@@ -29,5 +34,3 @@
 
         </div>
         </div>
-Professional coaches can evaluate and analyse player performance using pre-processed IMU data
-     including acceleration and rotational speed). Players can also review their performance.
