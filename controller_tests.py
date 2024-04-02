@@ -10,10 +10,10 @@ from flask import (
     abort,
     Blueprint,
 )
-from . import create_app
-from .extension import db
-from .models import Trainer, Player, Data
-from .schemas import Trainer_Schema, Data_Schema, Player_Schema
+from .src import create_app
+from .src.extension import db
+from .src.models import Trainer, Player, Data
+from .src.schemas import Trainer_Schema, Data_Schema, Player_Schema
 import jsonify
 import pandas as pd
 from flask import jsonify, request
