@@ -7,13 +7,13 @@ requires = ["setuptools", "wheel", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["comp0034-cw2i-King-in-black"]
 include = ["src*"]
 exclude = ["*/tests*"]
 namespaces = false
 
 [tool.pytest.ini_options]
-testpaths = ["src/tests"]
+testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true

@@ -17,7 +17,7 @@ def live_server():
     Define a live_server for the Selenium tests on the Chrome Browser
     '''
     server=subprocess.Popen(['flask',"--app","controller_tests","run","--port","5000"])
-    time.sleep(10)
+    time.sleep(20)
     try:
         yield server
     finally:
