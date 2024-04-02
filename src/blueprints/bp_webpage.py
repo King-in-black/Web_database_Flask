@@ -1,11 +1,14 @@
 from flask import Blueprint, request, jsonify,redirect,render_template,url_for,abort
 from flask import flash
+import os
 from ..models import Player,Trainer,Data
 from ..schemas import Player_Schema,Trainer_Schema,Data_Schema
 from ..extension import db
 import pickle
 import math
-model = pickle.load(open(r'ML_models\random_forest_model.pkl', 'rb'))
+model_path = os.path.join(os.path.dirname(__file__), '..', 'ML_models', 'random_forest_model.pkl')
+with open(model_path, 'rb') as model_file:
+    model = pickle.load(model_file)
 webpage_bp = Blueprint("webpage", __name__)
 @webpage_bp.route('/', methods=['GET', 'POST'])
 def jump_homepage():

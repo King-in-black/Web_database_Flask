@@ -8,13 +8,13 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["comp0034_coursework_1*"]
+include = ["src*"]
 exclude = ["*/tests*"]
 namespaces = false
 
 [tool.pytest.ini_options]
-testpaths = ["src/comp0034_coursework_1/tests"]
+testpaths = ["src/tests"]
 
 [tool.coverage.run]
 branch = true
-source = ["src/comp0034_coursework_1"]
+source = ["src"]
