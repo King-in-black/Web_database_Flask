@@ -20,7 +20,7 @@ def test_complete_function_2(driver, live_server):
     Resultant_gyro= 1.0
     :param driver: the driver to Google Chrome
     :param live_server: the live_server on the Selenium tests
-    :return:
+    :return:1
     '''
     driver.get("http://localhost:5000")
     assert "homepage" in driver.page_source
