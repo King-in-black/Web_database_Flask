@@ -6,6 +6,8 @@ from ..schemas import Player_Schema,Trainer_Schema,Data_Schema
 from ..extension import db
 import pickle
 import math
+import warnings
+warnings.filterwarnings("ignore", message="Trying to unpickle estimator", module="sklearn.base")
 model_path = os.path.join(os.path.dirname(__file__), '..', 'ML_models', 'random_forest_model.pkl')
 with open(model_path, 'rb') as model_file:
     model = pickle.load(model_file)
