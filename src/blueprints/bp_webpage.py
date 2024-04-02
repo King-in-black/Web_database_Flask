@@ -71,7 +71,7 @@ def register():
 
         db.session.commit()  # submit the changes in the database
         # jump to login page if a user register successfully
-        return redirect(url_for('login'))
+        return redirect(url_for('webpage.login'))
 
     return render_template('register.html')
 
