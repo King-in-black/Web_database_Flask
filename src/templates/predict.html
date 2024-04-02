@@ -45,7 +45,7 @@
             <label for ="gyroZ"> gyroZ: </label>
             <input type="number" step="any" name="gyroZ" id = "gyroZ" placeholder="gyroZ" required class="form-control mb-3">
         </div>
-   <button type="submit" class="btn btn-primary">Predict</button>
+   <button type="submit" id="turnon" class="btn btn-primary">Predict</button>
 </form>
     </form>
                        </div>
@@ -59,16 +59,16 @@
                    <div class="card-body">
                         <h1 class="card-title">Result</h1>
                         {% if prediction is not none and Move %}
-                       <div class="alert alert-info" role="alert">
+                       <div class="alert alert-info" id="prediction" role="alert">
                        <strong>Prediction:</strong> {{ prediction }}
                        </div>
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert alert-success" id="move" role="alert">
                         <strong>Status:</strong> {{ Move }}
                         </div>
-                        <div class="alert alert-info" role="alert">
+                        <div class="alert alert-info" id="ra" role="alert">
                        <strong>Resultant Acceleration:</strong> {{ Resultant_Acc }}
                        </div>
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert alert-success" id="rg" role="alert">
                         <strong>Resultant Gyro:</strong> {{ Resultant_Gyro }}
                         </div>
                         {% else %}
