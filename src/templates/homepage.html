@@ -1,18 +1,33 @@
+
 {% extends "base.html" %}
-
-{% block content %}
-
-    <h1>Homepage</h1>
-    <form action="/homepage" method="post">
-        <button type="submit" name="action" value="login">Login</button>
-        <button type="submit" name="action" value="register">Register</button>
-    </form>
-    <h2>
-        The brief introduction of the website:
-    </h2>
-    <h3>
-       Professional coaches can evaluate and analyse player performance using pre-processed IMU data
-     (including acceleration and rotational speed). Players can review their performance after the coach has analysed their data.
-      their data.
-    </h3>
+{% block head %}
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 {% endblock %}
+{% block content %}
+ <div class="container mt-5 pt-5">
+    <div class ='row'>
+         <div class="col-md-6 ">
+        <div class ="card">
+            <img src="{{ url_for('static', filename='image/IMU_4.png') }}" class="card-img-top" alt="...">
+        </div>
+        </div>
+        <div class="col-md-6 mt-5 pt-5">
+              <div class="card">
+                   <div class="card-body">
+                        <h1 class="card-title">Homepage</h1>
+    {% for message in get_flashed_messages(category_filter=["error", "success"]) %}
+        <div>{{ message }}</div>
+    {% endfor %}
+    <form method="POST" action="{{ url_for('webpage.homepage') }}">
+        <button type="submit" name="action" value="login" class="btn btn-primary mb-3">Login</button>
+        <button type="submit" name="action" value="register" class="btn btn-primary mb-3">Register</button>
+    </form>
+                       </div>
+                   </div>
+         </div>
+
+        </div>
+        </div>
+Professional coaches can evaluate and analyse player performance using pre-processed IMU data
+     including acceleration and rotational speed). Players can also review their performance.
