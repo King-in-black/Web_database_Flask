@@ -36,6 +36,7 @@ jobs:
           python -m pip install --upgrade pip
           google-chrome --version
           pip install selenium pytest webdriver_manager
+          pip install -r requirements.txt
 
       - name: Run Selenium Tests
         run: pytest tests/
