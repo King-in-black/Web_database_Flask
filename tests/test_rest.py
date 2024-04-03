@@ -6,6 +6,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 
 
+
+
 def test_complete_function_1(driver, live_server):
     '''
     A trainer wants to register an account to predict the result of activity for IMU
@@ -27,10 +29,12 @@ def test_complete_function_1(driver, live_server):
     driver.get("http://localhost:5000")
     # Here is the home page
     assert "homepage" in driver.page_source
-    time.sleep(3)
+    time.sleep(10)
     # find register link through navigation bar
     # step 1:
-    register_link = driver.find_element(By.LINK_TEXT, "register")
+    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, "nav_register")))
+    register_link = driver.find_element(By.ID, "nav_register")
+    ActionChains(driver).move_to_element(register_link).perform()
     register_link.click()
     assert driver.current_url.endswith("/register")
     # step 2:

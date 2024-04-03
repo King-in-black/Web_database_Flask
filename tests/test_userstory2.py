@@ -24,13 +24,10 @@ def test_complete_function_2(driver, live_server):
     '''
     driver.get("http://localhost:5000")
     assert "homepage" in driver.page_source
-    driver.get("http://localhost:5000")
-    # Here is the home page
-    assert "homepage" in driver.page_source
-    time.sleep(3)
+    time.sleep(10)
     # find register link through navigation bar
     # step 1:
-    register_link = driver.find_element(By.LINK_TEXT, "register")
+    register_link = driver.find_element(By.ID, "nav_register")
     register_link.click()
     assert driver.current_url.endswith("/register")
     # step 2:
