@@ -4,10 +4,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
-
-
-
-
 def test_complete_function_1(driver, live_server):
     '''
     A trainer wants to register an account to predict the result of activity for IMU
@@ -29,7 +25,6 @@ def test_complete_function_1(driver, live_server):
     driver.get("http://localhost:5000")
     # Here is the home page
     assert "homepage" in driver.page_source
-    time.sleep(10)
     # find register link through navigation bar
     # step 1:
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, "nav_register")))
@@ -49,7 +44,7 @@ def test_complete_function_1(driver, live_server):
     register_role_select.select_by_visible_text("Trainer")
     button_register = driver.find_element(By.ID, "submit")
     button_register.click()
-    time.sleep(3)
+    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, "user_id")))
     assert driver.current_url.endswith("/login")
     # step 3:
     login_form_user_id = driver.find_element(By.ID, "user_id")
@@ -61,7 +56,7 @@ def test_complete_function_1(driver, live_server):
     login_role_select.select_by_visible_text("Trainer")
     button_login = driver.find_element(By.ID, "submit")
     button_login.click()
-    time.sleep(3)
+    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, "accX")))
     assert driver.current_url.endswith("/predict")
     # step 4-5:
     predict_form_accX = driver.find_element(By.ID, "accX")
@@ -83,7 +78,7 @@ def test_complete_function_1(driver, live_server):
     button_predict = driver.find_element(By.ID, "turnon")
     ActionChains(driver).move_to_element(button_predict).perform()
     button_predict.click()
-    time.sleep(3)
+    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, "prediction")))
     predict_result_prediction = driver.find_element(By.ID, "prediction")
     predict_result_move = driver.find_element(By.ID, "move")
     predict_result_ra = driver.find_element(By.ID, "ra")

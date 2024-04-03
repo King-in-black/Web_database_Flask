@@ -7,8 +7,8 @@ def test_complete_function_2(driver, live_server):
 
     '''
     A player wants to register an account to predict the result of activity for IMU
-    1. He needs to jump in register through the button in card body
-    2. He needs to jump to login page through the page button
+    1. He needs to jump in register through the button in navigation bar
+    2. He needs to jump to login page through the card body
     3. He needs to choose role as player and type the user_name as a password as 123456
     4. He finds there is an account_ID already
     5. He logs in with account name 'a' and password 'a' and jumps to predict page
