@@ -4,13 +4,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+
+
 def test_navigation_bar(driver, live_server):
-    '''
+    """
     Tests all functions of navigation bar. Switch to homepage link and then switch to register link,
     :param driver:
     :param live_server:
     :return:
-    '''
+    """
     driver.get("http://localhost:5000")
     # Here is the home page
     assert "homepage" in driver.page_source

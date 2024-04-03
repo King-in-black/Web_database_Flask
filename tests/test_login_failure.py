@@ -4,14 +4,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+
+
 def test_log_failure(driver, live_server):
-    '''
+    """
     1. Jump to homepage
     2. Jump to register through homepage button
     3 . test to register an account called Ali; player ; password 123456 ; his trainer is KG.
     4.He tries to log in and he fails because he types ali and password 123456
     5.He retypes to change ali to Ali and successfully logins
-    '''
+    """
     driver.get("http://localhost:5000")
     # Here is the home page
     assert "homepage" in driver.page_source
@@ -66,8 +68,3 @@ def test_log_failure(driver, live_server):
     time.sleep(3)
     # step 5:
     assert driver.current_url.endswith("/predict")
-
-
-
-
-

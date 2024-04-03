@@ -17,9 +17,7 @@
 4.test_userstory.py and test_userstory2.py tests 2 user stories of complete process which a user try to register
 ,log in , predict activity state by typing data. 
 
-
 ![img_2.png](img_2.png)
-
 
 If you want to connect to exsiting to SQLlite database and run the webapp; Switch you work directory to
 comp0034-cw2i-King-in-black\src and then run the code:

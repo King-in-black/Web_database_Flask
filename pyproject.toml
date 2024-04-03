@@ -17,4 +17,4 @@ testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true
-source = ["src/"]
+source = ["src/blueprints"]

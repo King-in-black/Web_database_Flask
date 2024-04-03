@@ -4,8 +4,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+
+
 def test_complete_function_1(driver, live_server):
-    '''
+    """
     A trainer wants to register an account to predict the result of activity for IMU
     1. He needs to jump in register  through the navigation bar
     2. He needs to choose role as trainer and type the user_name as arnold, password as 123456
@@ -21,7 +23,7 @@ def test_complete_function_1(driver, live_server):
     :param driver: the driver to Google Chrome
     :param live_server: the live_server on the Selenium tests
     :return:
-    '''
+    """
     driver.get("http://localhost:5000")
     # Here is the home page
     assert "homepage" in driver.page_source
@@ -93,5 +95,3 @@ def test_complete_function_1(driver, live_server):
     assert "1.73" in predict_result_ra.text
     assert "Gyro" in predict_result_rg.text
     assert "1.73" in predict_result_rg.text
-
-

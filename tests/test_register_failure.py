@@ -4,14 +4,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+
+
 def test_register_failure(driver, live_server):
-    '''
+    """
     1. Jump to homepage
     2. Jump to register through homepage button
     3 . test to register an account called Ali; player ; password 123456 ; his trainer is KG.
     4.He tries to register again with same username and with different password
     5.An error of 404 is raised.
-    '''
+    """
     driver.get("http://localhost:5000")
     # Here is the home page
     assert "homepage" in driver.page_source
@@ -56,9 +58,3 @@ def test_register_failure(driver, live_server):
     button_register.click()
     time.sleep(5)
     assert "404 Not Found" in driver.page_source
-
-
-
-
-
-

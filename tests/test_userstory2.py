@@ -1,4 +1,3 @@
-
 import time
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
@@ -6,9 +5,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 import requests
-def test_complete_function_Database_check(driver, live_server):
 
-    '''
+
+def test_complete_function_Database_check(driver, live_server):
+    """
      A player wants to register an account to predict the result of activity for IMU. The storage of data is
      also under test.
     1. He needs to jump in register through the button in navigation bar
@@ -25,7 +25,7 @@ def test_complete_function_Database_check(driver, live_server):
     :param driver: the driver to Google Chrome
     :param live_server: the live_server on the Selenium tests
     :return:1
-    '''
+    """
     driver.get("http://localhost:5000")
     assert "homepage" in driver.page_source
     time.sleep(10)
