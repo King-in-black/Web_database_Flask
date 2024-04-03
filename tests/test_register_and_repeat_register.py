@@ -9,8 +9,8 @@ def test_log_failure(driver, live_server):
     1. Jump to homepage
     2. Jump to register through homepage button
     3 . test to register an account called Ali; player ; password 123456 ; his trainer is KG.
-    4.He tries to log in but he fails because he types ali and password 123456
-    5.He retypes to change ali to Ali and successfully login
+    4.He tries to log in and he fails because he types ali and password 123456
+    5.He retypes to change ali to Ali and successfully logins
     '''
     driver.get("http://localhost:5000")
     # Here is the home page

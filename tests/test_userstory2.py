@@ -1,17 +1,21 @@
+
 import time
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
-
-def test_complete_function_2(driver, live_server):
+import requests
+def test_complete_function_Database_check(driver, live_server):
 
     '''
-    A player wants to register an account to predict the result of activity for IMU
+     A player wants to register an account to predict the result of activity for IMU. The storage of data is
+     also under test.
     1. He needs to jump in register through the button in navigation bar
     2. He needs to jump to login page through the card body
     3. He needs to choose role as player and type the user_name as a password as 123456
     4. He finds there is an account_ID already
-    5. He logs in with account name 'a' and password 'a' and jumps to predict page
+    5. He logs in with account name 'bill' and password 123456 and jumps to predict page
     6. He types in 1,1,1,1,1,1 for AccX, AccY, AccZ, gyroX, gyroY and gyroZ.
     7. The results should be:
     Movement: Moving
@@ -44,6 +48,11 @@ def test_complete_function_2(driver, live_server):
     button_register.click()
     time.sleep(3)
     assert driver.current_url.endswith("/login")
+    # interfere with The Rest Api
+    response_user = requests.get("http://localhost:5000/get/get_player/bill")
+    assert response_user.status_code == 200
+    json_data = response_user.json()
+    assert json_data["Player_ID"] == "bill"
     # step 3:
     login_form_user_id = driver.find_element(By.ID, "user_id")
     login_option_role = driver.find_element(By.ID, "role")
